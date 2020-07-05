@@ -2,19 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { Tweet } from "./Tweet";
 
+import { loadTweets } from "../helpers";
+
 export const Tweets = () => {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/tweets/")
-      .then((response) => response.json())
-      .then((data) => {
-        console.error("Success:", data);
-        setTweets(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    loadTweets(setTweets);
   }, []);
 
   return (
