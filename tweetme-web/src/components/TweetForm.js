@@ -13,17 +13,9 @@ const TweetForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newTweet = {
-      id: 2324,
-      content: tweetText,
-      likes: 0,
-    };
-    const newCreatedTweet = createTweet(newTweet);
-    setTimeout(() => {
-      if (newCreatedTweet) {
-        setTweets((tweets) => [newTweet, ...tweets]);
-      }
-    }, 1000);
+    createTweet({ content: tweetText }).then((newCreatedTweet) => {
+      setTweets((tweets) => [newCreatedTweet, ...tweets]);
+    });
     setTweetText("");
   };
 

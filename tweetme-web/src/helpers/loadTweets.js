@@ -6,13 +6,3 @@ export const loadTweets = () => {
       console.error("Error:", error);
     });
 };
-
-export const createTweet = (newTweet) => {
-  // return fetch("http://127.0.0.1:8000/api/tweets/create")
-  //   .then((response) => (response.ok ? response.json() : []))
-  //   .then((data) => data)
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //   });
-  return newTweet;
-};
