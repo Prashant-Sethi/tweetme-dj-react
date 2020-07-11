@@ -1,10 +1,18 @@
-export const loadTweets = (setTweets) => {
-  fetch("http://127.0.0.1:8000/api/tweets/")
-    .then((response) => response.json())
-    .then((data) => {
-      setTweets(data);
-    })
+export const loadTweets = () => {
+  return fetch("http://127.0.0.1:8000/api/tweets/")
+    .then((response) => (response.ok ? response.json() : []))
+    .then((data) => data)
     .catch((error) => {
       console.error("Error:", error);
     });
+};
+
+export const createTweet = (newTweet) => {
+  // return fetch("http://127.0.0.1:8000/api/tweets/create")
+  //   .then((response) => (response.ok ? response.json() : []))
+  //   .then((data) => data)
+  //   .catch((error) => {
+  //     console.error("Error:", error);
+  //   });
+  return newTweet;
 };

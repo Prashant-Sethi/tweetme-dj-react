@@ -1,3 +1,3 @@
-import { loadTweets } from "./loadTweets";
+import { loadTweets, createTweet } from "./loadTweets";
 
-export { loadTweets };
+export { loadTweets, createTweet };

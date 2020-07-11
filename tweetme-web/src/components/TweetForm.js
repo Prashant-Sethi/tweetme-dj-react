@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 
+import { useTweetsValue } from "../context";
+import { createTweet } from "../helpers";
+
 const TweetForm = (props) => {
+  const { setTweets } = useTweetsValue();
   const [tweetText, setTweetText] = useState("");
 
   const handleChange = (event) => {
     setTweetText(event.target.value);
-    console.log(tweetText);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
+    const newTweet = {
+      id: 2324,
+      content: tweetText,
+      likes: 0,
+    };
+    const newCreatedTweet = createTweet(newTweet);
+    setTimeout(() => {
+      if (newCreatedTweet) {
+        setTweets((tweets) => [newTweet, ...tweets]);
+      }
+    }, 1000);
+    setTweetText("");
   };
 
   return (

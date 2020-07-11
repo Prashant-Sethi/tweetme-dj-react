@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Tweet } from "./Tweet";
 
-import { loadTweets } from "../helpers";
+import { useTweetsValue } from "../context";
 
 export const Tweets = () => {
-  const [tweets, setTweets] = useState([]);
-
-  useEffect(() => {
-    loadTweets(setTweets);
-  }, []);
+  const { tweets } = useTweetsValue();
 
   return (
     <div className="col-10 mx-auto col-md-6">
