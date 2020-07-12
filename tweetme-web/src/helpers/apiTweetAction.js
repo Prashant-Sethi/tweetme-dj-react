@@ -1,6 +1,6 @@
 import { getCookie } from "./getCookie";
 
-export const actionTweet = (tweetData) => {
+export const apiTweetAction = (tweetData) => {
   const csrftoken = getCookie("csrftoken");
   return fetch("http://127.0.0.1:8000/api/tweets/action/", {
     method: "post",

@@ -1,5 +1,5 @@
 import { loadTweets } from "./loadTweets";
 import { createTweet } from "./createTweet";
-import { actionTweet } from "./actionTweet";
+import { apiTweetAction } from "./apiTweetAction";
 
-export { loadTweets, createTweet, actionTweet };
+export { loadTweets, createTweet, apiTweetAction };

@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ActionBtn = (props) => {
-  const { tweet, action, likes, handleTweetActionBtn } = props;
+  const { tweet, action, handleTweetActionBtn } = props;
 
   const className = props.className
     ? props.className
@@ -9,7 +9,7 @@ export const ActionBtn = (props) => {
 
   const btnText =
     action === "like"
-      ? `${likes} Likes`
+      ? `${tweet.likes} Likes`
       : action === "unlike"
       ? "Unlike"
       : action === "retweet"
@@ -19,7 +19,7 @@ export const ActionBtn = (props) => {
   return (
     <button
       className={className}
-      onClick={() => handleTweetActionBtn(tweet.id, likes, action)}
+      onClick={() => handleTweetActionBtn(tweet.id, tweet.likes, action)}
     >
       {btnText}
     </button>
