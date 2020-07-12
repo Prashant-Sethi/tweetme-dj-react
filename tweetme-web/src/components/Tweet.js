@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { ActionBtn } from "./ActionBtn";
 import { ParentTweet } from "./ParentTweet";
 
+import { useTweetsValue } from "../context";
 import { apiTweetAction } from "../helpers";
 
 export const Tweet = (props) => {
-  const { tweet } = props;
+  const { tweet, hideActions } = props;
+  const { setTweets } = useTweetsValue();
+
   const tweetActions = ["like", "unlike", "retweet"];
 
   const [actionTweet, setActionTweet] = useState(tweet ? tweet : null);
@@ -18,7 +21,16 @@ export const Tweet = (props) => {
     apiTweetAction({
       id: tweet_id,
       action,
-    }).then((tweet) => setActionTweet(tweet));
+    }).then((response) => {
+      const status = response.status;
+      response.json().then((tweet) => {
+        if (status === 200) {
+          setActionTweet(tweet);
+        } else if (status === 201) {
+          setTweets((tweets) => [tweet, ...tweets]);
+        }
+      });
+    });
   };
 
   return (
@@ -27,16 +39,18 @@ export const Tweet = (props) => {
         <p>{`${tweet.id} - ${tweet.content}`}</p>
         <ParentTweet tweet={tweet} />
       </div>
-      <div className="btn btn-group">
-        {tweetActions.map((action, index) => (
-          <ActionBtn
-            key={index}
-            tweet={actionTweet}
-            action={action}
-            handleTweetActionBtn={handleTweetActionBtn}
-          />
-        ))}
-      </div>
+      {actionTweet && hideActions !== true && (
+        <div className="btn btn-group">
+          {tweetActions.map((action, index) => (
+            <ActionBtn
+              key={index}
+              tweet={actionTweet}
+              action={action}
+              handleTweetActionBtn={handleTweetActionBtn}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

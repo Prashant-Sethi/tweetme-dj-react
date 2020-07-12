@@ -77,14 +77,17 @@ def tweet_action_view(request, *args, **kwargs):
         tweet = query_set.first()
         if action == 'like':
             tweet.likes.add(request.user)
+            status = 200
         elif action == 'unlike':
             tweet.likes.remove(request.user)
+            status = 200
         elif action == 'retweet':
             tweet = Tweet.objects.create(
                 user=request.user,
                 parent=tweet,
                 content=content
             )
+            status = 201
         serializer = TweetSerializer(tweet)
-        return Response(serializer.data, status=200)
+        return Response(serializer.data, status=status)
     return Response({}, status=200)

@@ -11,8 +11,7 @@ export const apiTweetAction = (tweetData) => {
       "X-CSRFToken": csrftoken,
     },
   })
-    .then((response) => (response.ok ? response.json() : {}))
-    .then((data) => data)
+    .then((response) => response)
     .catch((error) => {
       console.error("Error:", error);
     });
