@@ -2,23 +2,20 @@ import { useState, useEffect } from "react";
 
 import { loadTweets } from "../helpers";
 
-export const useTweets = () => {
+export const useTweets = (username) => {
   const [tweets, setTweets] = useState([]);
-
-  useEffect(() => {
-    loadTweets().then((newTweets) => {
-      setTweets(newTweets);
-    });
-  }, []);
 
   // useEffect(() => {
   //   loadTweets().then((newTweets) => {
-  //     if (tweets.length !== newTweets.length) {
-  //       setTweets(newTweets);
-  //     }
+  //     setTweets(newTweets);
   //   });
-  //   setTweets(tweets);
-  // }, [tweets]);
+  // }, []);
+
+  useEffect(() => {
+    loadTweets(username).then((newTweets) => {
+      setTweets(newTweets);
+    });
+  }, [username]);
 
   return { tweets, setTweets };
 };

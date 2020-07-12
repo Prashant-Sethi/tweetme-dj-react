@@ -4,11 +4,11 @@ import "./App.css";
 import { TweetsProvider } from "./context";
 import { TweetsComponent } from "./components/TweetsComponent";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <TweetsProvider>
-        <TweetsComponent />
+        <TweetsComponent {...props} />
       </TweetsProvider>
     </div>
   );

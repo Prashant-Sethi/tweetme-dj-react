@@ -1,5 +1,10 @@
-export const loadTweets = () => {
-  return fetch("http://127.0.0.1:8000/api/tweets/")
+export const loadTweets = (username) => {
+  let url = "http://127.0.0.1:8000/api/tweets/";
+  if (username) {
+    url = `${url}?username=${username}`;
+  }
+
+  return fetch(url)
     .then((response) => (response.ok ? response.json() : []))
     .then((data) => data)
     .catch((error) => {

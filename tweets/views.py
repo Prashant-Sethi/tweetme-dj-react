@@ -24,6 +24,9 @@ def home_view(request, *args, **kwargs):
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
     query_set = Tweet.objects.all()
+    username = request.GET.get('username')
+    if username:
+        query_set = query_set.filter(user__username__iexact=username)
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
