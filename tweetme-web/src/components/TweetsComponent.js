@@ -4,7 +4,7 @@ import { Tweets } from "./Tweets";
 
 export const TweetsComponent = () => {
   return (
-    <div>
+    <div className="col-10 mx-auto mt-5">
       <TweetForm />
       <Tweets />
     </div>

@@ -8,7 +8,7 @@ export const Tweets = () => {
   const { tweets } = useTweetsValue();
 
   return (
-    <div className="col-10 mx-auto col-md-6">
+    <div className="col-10 mx-auto col-md-8">
       {tweets.map((tweet) => (
         <Tweet
           key={tweet.id}

@@ -5,10 +5,15 @@ import { createTweet } from "../helpers";
 
 const TweetForm = (props) => {
   const { setTweets } = useTweetsValue();
+  const maxCharacters = 240;
+
   const [tweetText, setTweetText] = useState("");
+  const [remainingChars, setRemainingChars] = useState(maxCharacters);
 
   const handleChange = (event) => {
-    setTweetText(event.target.value);
+    const text = event.target.value.slice(0, maxCharacters);
+    setTweetText(text);
+    setRemainingChars(maxCharacters - text.length);
   };
 
   const handleSubmit = (event) => {
@@ -21,16 +26,20 @@ const TweetForm = (props) => {
 
   return (
     <div className={props.className}>
-      <div className="col-12 mb-2">
+      <div className="col-6 mb-2 mx-auto">
         <form onSubmit={handleSubmit}>
+          <label htmlFor="tweet">Create your new tweet</label>
           <textarea
             className="form-control"
             name="tweet"
-            id=""
+            id="tweet"
             rows="3"
             value={tweetText}
             onChange={handleChange}
           />
+          <p className="text-muted left">
+            {`${remainingChars} characters remaining...`}
+          </p>
           <button type="submit" className="btn btn-primary my-3">
             Tweet
           </button>
