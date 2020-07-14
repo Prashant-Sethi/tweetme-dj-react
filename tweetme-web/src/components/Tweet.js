@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import { ActionBtn } from "./ActionBtn";
 import { ParentTweet } from "./ParentTweet";
 
@@ -6,7 +8,7 @@ import { useTweetsValue } from "../context";
 import { apiTweetAction } from "../helpers";
 
 export const Tweet = (props) => {
-  const { tweet, hideActions } = props;
+  const { tweet, hideActions, isDetail } = props;
   const { setTweets } = useTweetsValue();
 
   const tweetActions = ["like", "unlike", "retweet"];
@@ -39,18 +41,25 @@ export const Tweet = (props) => {
         <p>{`${tweet.id} - ${tweet.content}`}</p>
         <ParentTweet tweet={tweet} />
       </div>
-      {actionTweet && hideActions !== true && (
-        <div className="btn btn-group">
-          {tweetActions.map((action, index) => (
-            <ActionBtn
-              key={index}
-              tweet={actionTweet}
-              action={action}
-              handleTweetActionBtn={handleTweetActionBtn}
-            />
-          ))}
-        </div>
-      )}
+      <div className="btn btn-group">
+        {actionTweet && hideActions !== true && (
+          <>
+            {tweetActions.map((action, index) => (
+              <ActionBtn
+                key={index}
+                tweet={actionTweet}
+                action={action}
+                handleTweetActionBtn={handleTweetActionBtn}
+              />
+            ))}
+          </>
+        )}
+        {!isDetail && (
+          <Link to={`/${tweet.id}`} className="btn btn-primary">
+            View Tweet
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
