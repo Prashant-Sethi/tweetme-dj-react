@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
+    'accounts.apps.AccountsConfig',
     'tweets.apps.TweetsConfig',
 
     # 'allauth',
@@ -116,8 +117,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# LOGIN_REDIRECT_URL = 'blog-home'
-# LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'logout'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
