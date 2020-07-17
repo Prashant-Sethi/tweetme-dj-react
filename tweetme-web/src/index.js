@@ -13,7 +13,7 @@ const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/api/tweets/home">
       <Nav />
       <TweetsProvider>
         <Switch>
