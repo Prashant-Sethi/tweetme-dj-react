@@ -1,15 +1,18 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { useTweets } from "../hooks";
+
+import { useUserValue } from "../context";
 
 export const TweetsContext = createContext();
 
 export const TweetsProvider = ({ children }) => {
-  const [username, setUsername] = useState(null);
+  const { username } = useUserValue();
   const { tweets, setTweets } = useTweets(username);
 
   return (
     <TweetsContext.Provider
-      value={{ username, setUsername, tweets, setTweets }}
+      value={{ tweets, setTweets }}
+      // value={{ tweets, setTweets }}
     >
       {children}
     </TweetsContext.Provider>

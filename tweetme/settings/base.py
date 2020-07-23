@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'tweets.apps.TweetsConfig',
+    'profiles.apps.ProfilesConfig',
 
     # 'allauth',
     # 'allauth.account',

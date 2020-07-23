@@ -4,4 +4,13 @@ import {
   useTweetsValue,
 } from "./tweets-context";
 
-export { TweetsContext, TweetsProvider, useTweetsValue };
+import { UserContext, UserProvider, useUserValue } from "./user-context";
+
+export {
+  TweetsContext,
+  TweetsProvider,
+  useTweetsValue,
+  UserContext,
+  UserProvider,
+  useUserValue,
+};

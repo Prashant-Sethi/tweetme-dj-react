@@ -38,6 +38,9 @@ export const Tweet = (props) => {
   return (
     <div className={className}>
       <div>
+        <p>
+          Tweet by <Link to={`/profile/${tweet.user}/`}>{tweet.user}</Link>
+        </p>
         <p>{`${tweet.id} - ${tweet.content}`}</p>
         <ParentTweet tweet={tweet} />
       </div>
@@ -55,7 +58,7 @@ export const Tweet = (props) => {
           </>
         )}
         {!isDetail && (
-          <Link to={`/${tweet.id}`} className="btn btn-primary">
+          <Link to={`/${tweet.id}/`} className="btn btn-primary">
             View Tweet
           </Link>
         )}

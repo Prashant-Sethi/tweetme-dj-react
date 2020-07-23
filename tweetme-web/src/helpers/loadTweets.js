@@ -1,7 +1,7 @@
 export const loadTweets = (username) => {
   let url = "http://127.0.0.1:8000/api/tweets/";
   if (username) {
-    url = `${url}?username=${username}`;
+    url = `${url}${username}/`;
   }
 
   return fetch(url)

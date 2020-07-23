@@ -38,10 +38,15 @@ class TweetCreateSerializer(serializers.ModelSerializer):
 class TweetSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
     parent = TweetCreateSerializer(read_only=True)
+    user = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Tweet
-        fields = ['id', 'content', 'created', 'likes', 'is_retweet', "parent"]
+        fields = ['id', 'user', 'content', 'created',
+                  'likes', 'is_retweet', "parent"]
 
     def get_likes(self, tweet):
         return tweet.likes.count()
+
+    def get_user(self, tweet):
+        return tweet.user.username

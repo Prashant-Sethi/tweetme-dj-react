@@ -1,19 +1,8 @@
 from django.urls import path, include
 
-from .views import (
-    home_view,
-    tweet_list_view,
-    tweet_detail_view,
-    tweet_create_view,
-    tweet_action_view,
-    tweet_delete_view
-)
+from .views import home_view
 
 urlpatterns = [
-    path('', tweet_list_view),
-    path('home/', home_view),
-    path('<int:tweet_id>/', tweet_detail_view),
-    path('create/', tweet_create_view),
-    path('action/', tweet_action_view),
-    path('<int:tweet_id>/delete/', tweet_delete_view),
+    path('', home_view, name='home'),
+    path('api/tweets/', include('tweets.api.urls'))
 ]

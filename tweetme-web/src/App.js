@@ -1,20 +1,35 @@
 import React, { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 import "./App.css";
 
-import { useTweetsValue } from "./context";
+import { useUserValue } from "./context";
 import { TweetsComponent } from "./components/TweetsComponent";
 
 function App(props) {
-  const { setUsername } = useTweetsValue();
+  const { username, setUsername } = useUserValue();
+
+  //const { username } = props.match.params;
+
+  let { user } = useParams();
+
+  let location = useLocation();
+
+  let isProfileView = location.pathname === `/profile/${user}/`;
 
   useEffect(() => {
-    setUsername(props.username);
-  }, [setUsername, props.username]);
+    setUsername(user);
+  }, [setUsername, user]);
 
   return (
     <div className="App">
-      <TweetsComponent />
+      {isProfileView ? (
+        username ? (
+          <TweetsComponent />
+        ) : null
+      ) : (
+        <TweetsComponent />
+      )}
     </div>
   );
 }
