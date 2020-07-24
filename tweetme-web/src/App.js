@@ -9,13 +9,11 @@ import { TweetsComponent } from "./components/TweetsComponent";
 function App(props) {
   const { username, setUsername } = useUserValue();
 
-  //const { username } = props.match.params;
+  const { user } = useParams();
 
-  let { user } = useParams();
+  const { pathname } = useLocation();
 
-  let location = useLocation();
-
-  let isProfileView = location.pathname === `/profile/${user}/`;
+  const isProfileView = pathname === `/profile/${user}/`;
 
   useEffect(() => {
     setUsername(user);

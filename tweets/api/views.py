@@ -14,9 +14,9 @@ from tweets.serializers import (
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
     query_set = Tweet.objects.all()
-    user = request.user
-    if user.is_authenticated:
-        query_set = query_set.filter(user=user)
+    # user = request.user
+    # if user.is_authenticated:
+    #     query_set = query_set.filter(user=user)
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
