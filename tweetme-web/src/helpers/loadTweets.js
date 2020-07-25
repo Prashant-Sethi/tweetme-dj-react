@@ -1,5 +1,5 @@
 export const loadTweets = (username) => {
-  let url = "http://127.0.0.1:8000/api/tweets/";
+  let url = "http://127.0.0.1:8000/api/tweets/list/";
   if (username) {
     url = `${url}${username}/`;
   }

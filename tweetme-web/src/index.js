@@ -19,7 +19,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/" exact component={App} />
           <Route path="/profile/:user" exact component={App} />
-          <Route path="/:id" exact component={TweetDetail} />
+          <Route path="/tweet/:id" exact component={TweetDetail} />
         </Switch>
       </UserProvider>
     </Router>

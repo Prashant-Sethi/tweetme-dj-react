@@ -58,7 +58,7 @@ export const Tweet = (props) => {
           </>
         )}
         {!isDetail && (
-          <Link to={`/${tweet.id}/`} className="btn btn-primary">
+          <Link to={`/tweet/${tweet.id}/`} className="btn btn-primary">
             View Tweet
           </Link>
         )}
