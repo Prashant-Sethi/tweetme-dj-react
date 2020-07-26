@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import Profile
@@ -10,9 +11,8 @@ def profile_detail_view(request, username, *args, **kwargs):
     return render(request, "pages/react.html")
 
 
+@login_required
 def profile_update_view(request, *args, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect('login')
     user = request.user
     user_data = {
         'first_name': user.first_name,
