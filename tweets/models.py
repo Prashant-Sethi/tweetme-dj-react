@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
@@ -13,6 +14,25 @@ class TweetLike(models.Model):
     liked_on = models.DateTimeField(default=timezone.now)
 
 
+class TweetQuerySet(models.QuerySet):
+    def feed(self, user):
+        followed_users_ids = user.following.values_list('user__id', flat=True)
+        q_user = Q(user=user)
+        q_following = Q(user__id__in=followed_users_ids)
+
+        return self.filter(
+            q_user | q_following
+        ).distinct().order_by('-created')
+
+
+class TweetManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return TweetQuerySet(self.model, using=self._db)
+
+    def feed(self, user):
+        return self.get_queryset().feed(user)
+
+
 class Tweet(models.Model):
     """Model definition for Tweet."""
 
@@ -23,6 +43,8 @@ class Tweet(models.Model):
     created = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(
         User, related_name='liked_by', through=TweetLike)
+
+    objects = TweetManager()
 
     class Meta:
         """Meta definition for Tweet."""

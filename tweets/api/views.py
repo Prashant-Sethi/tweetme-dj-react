@@ -31,13 +31,7 @@ def tweet_list_user_view(request, username, *args, **kwargs):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def tweet_feed_view(request, *args, **kwargs):
-    user = request.user
-    following_ids = user.following.all()
-    query_ids = [user.id]
-    if following_ids.exists():
-        query_ids += [profile.user.id for profile in following_ids]
-    query_set = Tweet.objects.filter(
-        user__id__in=query_ids).order_by('-created')
+    query_set = Tweet.objects.feed(request.user)
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
